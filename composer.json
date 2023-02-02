@@ -1,0 +1,6 @@
+{
+	"name": "html12pdf/codeigniter",
+	"require": {
+		"dompdf/dompdf": "0.6.&"
+	}
+}

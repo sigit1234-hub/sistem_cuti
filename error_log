@@ -1,0 +1,5 @@
+[27-Feb-2021 15:33:11 Asia/Jakarta] PHP Fatal error:  Can't use function return value in write context in /home/garud439/public_html/mockup/application/views/cuti/cuti_acc.php on line 97
+[27-Feb-2021 15:34:58 Asia/Jakarta] PHP Fatal error:  Can't use function return value in write context in /home/garud439/public_html/mockup/application/views/cuti/cuti_acc.php on line 97
+[27-Feb-2021 15:35:03 Asia/Jakarta] PHP Fatal error:  Can't use function return value in write context in /home/garud439/public_html/mockup/application/views/cuti/cuti_acc.php on line 97
+[27-Feb-2021 15:35:54 Asia/Jakarta] PHP Fatal error:  Can't use function return value in write context in /home/garud439/public_html/mockup/application/views/cuti/cuti_acc.php on line 281
+[27-Feb-2021 15:37:46 Asia/Jakarta] PHP Fatal error:  Can't use function return value in write context in /home/garud439/public_html/mockup/application/views/cuti/index.php on line 280
