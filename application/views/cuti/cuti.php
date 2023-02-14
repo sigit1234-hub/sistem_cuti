@@ -1,6 +1,7 @@
 <?php
 $this->load->model('User_m');
 ?>
+<!-- tambah -->
 <div class="content-page">
     <!-- Start content -->
     <div class="content">
