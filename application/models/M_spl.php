@@ -8,7 +8,7 @@ class M_spl extends CI_Model
 {
     public function tampil_data($id = null)
     {
-        $query = $this->db->order_by('id', 'Desc')->get('spl')->result_array();
+        $query = $this->db->order_by('id', 'Desc')->get('spl');
         return $query;
     }
     public function tampil_data_divisi()

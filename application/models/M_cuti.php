@@ -157,7 +157,7 @@ class M_cuti extends CI_Model
       ];
       $this->db->where('id', $id);
       $this->db->update('cuti', $data);
-      $this->_sendEmailHead($post, $id_nama);
+      // $this->_sendEmailHead($post, $id_nama);
     } else {
       $id = $this->input->post('id', true);
       $id_nama = $this->input->post('nama_id', true);
@@ -199,7 +199,7 @@ class M_cuti extends CI_Model
       ];
       $this->db->where('id', $id);
       $this->db->update('cuti', $data);
-      $this->_sendEmailHR($post, $id_nama);
+      // $this->_sendEmailHR($post, $id_nama);
     }
   }
   public function edit_acc($post)
@@ -244,7 +244,7 @@ class M_cuti extends CI_Model
     ];
     $this->db->where('id', $id);
     $this->db->update('cuti', $data);
-    $this->_send_email($post, $id_nama);
+    // $this->_send_email($post, $id_nama);
   }
   public function tambah_cuti($post)
   {
@@ -293,208 +293,9 @@ class M_cuti extends CI_Model
       'status1' => 1
     ];
     $this->db->insert('cuti', $data);
-    $this->_send_email($post, $id);
+    // $this->_send_email($post, $id);
   }
-  // public function _sendEmail($post)
-  // {
-  //   $judul = "Persetujuan Cuti";
-  //   $awal =  htmlspecialchars($this->input->post('tanggal_acc_hr', true));
-  //   $akhir = htmlspecialchars($this->input->post('sampai_tanggal', true));
-  //   $id = htmlspecialchars($this->input->post('id', true));
-  //   $keterangan = htmlspecialchars($this->input->post('keterangan', true));
-  //   $catatan = htmlspecialchars($this->input->post('catatan', true));
-  //   $date_created = htmlspecialchars($this->input->post('date_created', true));
 
-  //   if ($awal == $akhir) {
-  //     $hasil = date('d M Y', strtotime($awal)) . '</b>';
-  //   } elseif (date(' M', strtotime($awal)) == date(' M', strtotime($akhir))) {
-  //     $hasil = date('d', strtotime($awal)) . "-" . date('d M Y', strtotime($akhir)) . '</b>';
-  //   } else {
-  //     $hasil = date('d M', strtotime($awal)) . "-" . date('d M Y', strtotime($akhir)) . '</b>';
-  //   }
-
-  //   if ($this->input->post('status', true) == 1) {
-  //     $status = "Menunggu ACC HEAD";
-  //   } elseif ($this->input->post('status') == 2) {
-  //     $status = "Disetujui";
-  //   } else {
-  //     $status = "Dibatalkan";
-  //   };
-
-  //   $this->db->where('id', $id);
-  //   $query = $this->db->get('karyawan')->result_array();
-
-  //   foreach ($query as $d) :
-
-  //     $this->db->where('id', $d['divisi']);
-  //     $divisi = $this->db->get('devisi')->result_array();
-
-  //     foreach ($divisi as $div) :
-
-  //       $config = array();
-  //       $config['protocol'] = 'smtp';
-  //       $config['smtp_host'] = 'ssl://smtp.googlemail.com';
-  //       $config['smtp_user'] = 'peminjamangmi@gmail.com';
-  //       $config['smtp_pass'] = 'lgtnfywhiaythuio';
-  //       $config['smtp_port'] = 465;
-  //       $config['mailtype'] = 'html';
-  //       $config['charset'] = 'utf-8';
-  //       $this->email->set_newline("\r\n");
-  //       $this->email->initialize($config);
-
-  //       //librari email di ci
-  //       $this->email->initialize($config);
-  //       $this->load->library('email', $config);
-  //       // $this->email->attach('assets/img/logo/gmi logo.png');
-  //       //mengatur email dikirim dari siapa
-  //       $this->email->from('peminjaman@garudamart.com', 'Eform GMI');
-
-  //       //kirim kemana
-  //       // $this->email->to($div['email_head']);
-  //       // $this->email->to($d['email']);
-  //       $this->email->to('ssprasetyo08@gmail.com');
-  //       $this->email->cc('sigit@garudamart.com');
-  //       $this->email->message('
-  //       <!DOCTYPE html>
-  //       <html lang="en" xmlns="" xmlns:o="">
-  //       <head>
-  //         <meta charset="UTF-8">
-  //         <meta name="viewport" content="width=device-width,initial-scale=1">
-  //         <meta name="x-apple-disable-message-reformatting">
-  //         <title></title>
-
-  //         <style>
-  //           table, td, div, h1, p {font-family: montserrat, sans-serif; color:#cccccc;}
-  //           img{}
-  //         </style>
-  //       </head>
-  //       <body style="margin:0;padding:0;">
-  //         <table role="presentation" style="width:100%;border-collapse:collapse;border:0;border-spacing:0;background:#070606;">
-  //           <tr>
-  //             <td align="center" style="padding:0;">
-  //               <table role="presentation" style="width:602px;border-collapse:collapse;border:1px solid #cccccc;border-spacing:0;text-align:left;">
-  //                 <tr>
-  //                   <td align="center" style="padding:40px 0 30px 0;background:#70bbd9;">
-  //                     <img src="https://info.garudamart.com/assets/img/logo/email.png" alt="" width="300" style="height:auto;display:block;" />
-  //                   </td>
-  //                 </tr>
-  //                 <tr>
-  //                   <td style="padding:36px 30px 42px 30px;">
-  //                     <table role="presentation" style="width:100%;border-collapse:collapse;border:0;border-spacing:0;">
-  //                       <tr>
-  //                           <td style="padding:0 0 36px 0;color:#153643;">
-  //                           <h1 style="font-size:24px;margin:0 0 20px 0;font-family:Arial,sans-serif;">Pengajuan Cuti Karyawan</h1>
-  //                           <p style="margin:0 0 12px 0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;">Halo, <b>' . $d['nama'] . '</b></p>
-  //                           <p>Berikut ini adalah informasi pengajuan cuti yang telah dibuat oleh karyawan atas nama dibawah ini melalui website info.garudamart.com (Eform GMI)</p>
-  //                           </td>
-  //                       </tr>
-  //                       <tr>
-  //                         <td style="padding:0;">
-  //                           <table role="presentation" style="width:100%;border-collapse:collapse;border:0;border-spacing:0;">
-  //                             <tr>
-  //                               <td style="width:150px;padding:0;vertical-align:top;color:#153643;">
-  //                                 <p style="margin:0 0 25px 0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;"> <img src="https://info.garudamart.com/assets/img/profile/' . $d['foto'] . '" alt="user" style="width: 130px; height: auto; border-radius: 100%;"></p>
-  //                                 </td>
-  //                               <td style="width:20px;padding:0;font-size:0;line-height:0;">&nbsp;</td>
-  //                               <td style="width:300px;padding:0;vertical-align:top;color:#153643;">
-  //                                 <p style="margin:0 0 25px 0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;color: yellow;"><b> Detail Pengajuan</b></p>
-  //                                 <table>
-  //                                   <tr>
-  //                                     <td>Nama</td>
-  //                                     <td>&emsp;: </td>
-  //                                     <td>' . $d['nama'] . '</td>
-  //                                 </tr>
-  //                                 <tr>
-  //                                     <td>Departemen</td>
-  //                                     <td>&emsp;: </td>
-  //                                     <td>' . $div['nama_divisi'] . '</td>
-  //                                 </tr>
-  //                                   <tr>
-  //                                       <td>Tanggal Cuti</td>
-  //                                       <td>&emsp;: </td>
-  //                                       <td>' . $hasil . '</td>
-  //                                   </tr>
-  //                                   <tr>
-  //                                       <td>Tanggal Persetujuan</td>
-  //                                       <td>&emsp;: </td>
-  //                                       <td>' . $date_created . '</td>
-  //                                   </tr>
-  //                                   <tr>
-  //                                       <td>Keterangan</td>
-  //                                       <td>&emsp;: </td>
-  //                                       <td>' . $keterangan . '</td>
-  //                                   </tr>
-  //                                   <tr>
-  //                                       <td>Catatan</td>
-  //                                       <td>&emsp;: </td>
-  //                                       <td>' . $catatan . '</td>
-  //                                   </tr>
-  //                                   <tr>
-  //                                       <td>Status</td>
-  //                                       <td>&emsp;: </td>
-  //                                       <td style="color:rgb(201, 3, 3) ;"><b>' . $status . '</b></td>
-  //                                   </tr>
-  //                                 </table>
-  //                               </td>
-  //                             </tr>
-  //                           </table>
-  //                         </td>
-  //                         <tr>
-  //                   <td style="padding-top: 30px;">
-  //                     <a href="https://info.garudamart.com/"><button  style="width: 100%; height:30px; align:center;">Buka Web Eform GMI</button></a>
-  //                   </td>
-  //                 </tr>
-  //                       </tr>
-  //                     </table>
-  //                   </td>
-  //                 </tr>
-  //                 <tr>
-  //                   <td style="padding:30px;background:#70bbd9;">
-  //                     <table role="presentation" style="width:100%;border-collapse:collapse;border:0;border-spacing:0;font-size:9px;font-family:Arial,sans-serif;">
-  //                       <tr style="font-size: 10px;" align="left">
-  //                         <p style="color: #000; font-size: 15px;">Semoga informasi ini dapat bermanfaat bagi Anda. Untuk dapat memberikan tanggapan, silahkan dapat membuka website info.garudamart.com.</p>
-  //                         <p style="color: #000; font-size: 15px;">Hormat kami<br><b><i>PT. Garuda Mart Indonesia | SP</i></b></p>
-  //                         <p style="color: #000;font-size: 15px;">Email ini dikirimkan secara otomatis mohon untuk tidak membalas email ini. <br>Terima kasih. </p>
-  //                       </tr>
-  //                       <tr>
-  //                         <td style="padding:0;width:50%;" align="left">
-  //                           <p style="margin:0;font-size:14px;line-height:16px;font-family:Arial,sans-serif;color:#ffffff;">
-  //                             <a href="http://info.garudamart.com" style="color:#ffffff;text-decoration:underline;">&reg; Info Garuda Mart Indonesia | Prasetyo<br/></a>
-  //                           </p>
-  //                         </td>
-  //                         <td style="padding:0;width:50%;" align="right">
-  //                           <table role="presentation" style="border-collapse:collapse;border:0;border-spacing:0;">
-  //                             <tr>
-  //                               <td style="padding:0 0 0 10px;width:38px;">
-  //                                 <a href="http://www.garudamart.com/" style="color:#ffffff;"><img src="https://info.garudamart.com/assets/images/logo_sm.png" alt="Twitter" width="38" style="height:auto;display:block;border:0;" /></a>
-  //                               </td>
-  //                               <!-- <td style="padding:0 0 0 10px;width:38px;">
-  //                                 <a href="http://www.facebook.com/" style="color:#ffffff;"><img src="https://assets.codepen.io/210284/fb_1.png" alt="Facebook" width="38" style="height:auto;display:block;border:0;" /></a>
-  //                               </td> -->
-  //                             </tr>
-  //                           </table>
-  //                         </td>
-  //                       </tr>
-  //                     </table>
-  //                   </td>
-  //                 </tr>
-  //               </table>
-  //             </td>
-  //           </tr>
-  //         </table>
-  //       </body>
-  //       </html>
-  //     ');
-  //       $this->email->subject($judul . ' - ' . $d['nama']);
-  //       if ($this->email->send()) {
-  //         return true;
-  //       } else {
-  //         echo $this->email->print_debugger();
-  //         die;
-  //       }
-  //     endforeach;
-  //   endforeach;
-  // }
   public function kurangi_kuota($post)
   {
     $id = htmlspecialchars($this->input->post('nama_id'));
@@ -600,12 +401,12 @@ class M_cuti extends CI_Model
         $this->load->library('email', $config);
         // $this->email->attach('assets/img/logo/gmi logo.png');
         //mengatur email dikirim dari siapa
-        $this->email->from('peminjaman@garudamart.com', 'Eform GMI');
+        $this->email->from('hr@cha-man.com', 'Cha-Man');
 
         //kirim kemana
         // $this->email->to($div['email_head']);
         $this->email->to('ssprasetyo08@gmail.com');
-        $this->email->cc('sigit@garudamart.com');
+        $this->email->cc('ssprasetyo08@gmail.com');
         $this->email->message('
         <!DOCTYPE html>
         <html lang="en" xmlns="" xmlns:o="">

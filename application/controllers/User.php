@@ -15,10 +15,10 @@ class User extends CI_Controller
         // $this->load->model('M_izin');
         // $this->load->model('M_kasbon');
         // $this->load->model('M_peminjaman');
-        // $this->load->model('M_spl');
+        $this->load->model('M_spl');
         $this->load->model('Member_model');
         $this->load->model('Menu_model');
-        // $this->load->model('Kodespl_model');
+        $this->load->model('Kodespl_model');
         // $this->load->model('M_MrPPA');
     }
     public function index()
@@ -43,15 +43,9 @@ class User extends CI_Controller
     {
         $data['user'] = $this->User_m->tampil_data();
         $data['cuti'] = $this->User_m->data_cuti();
-        $data['izin'] = $this->User_m->data_izin();
         $data['title'] = "Karyawan";
         $data['sisa_cuti'] = $this->User_m->get_sisa_cuti();
-        $data['jumlah_izin'] = $this->User_m->get_jumlah_izin();
-        $data['kasbon'] = $this->User_m->data_kasbon();
-        $data['peminjaman'] = $this->User_m->data_peminjaman();
         $data['ultah'] = $this->User_m->get_ultah();
-        $data['kasbon_status'] = $this->User_m->sisa_kasbon();
-        $data['jml'] = $this->M_kasbon->get_jml_bayar();
         $data['get'] = $this->User_m->update_kuota();
 
 

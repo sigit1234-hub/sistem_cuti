@@ -106,7 +106,7 @@
                                         </td>
                                     <?php endforeach; ?>
                                     <?php
-                                    $this->db->where('id', $d['mengetahui']);
+                                    $this->db->where('id', $d['head']);
                                     $hrd = $this->db->get('karyawan')->result_array();
                                     ?>
                                     <?php foreach ($hrd as $hr) : ?>
@@ -163,7 +163,8 @@ foreach ($cuti as $d) : $no++ ?>
                         <div class="col-lg-12 col-sm-12 col-xs-12 col-md-12 col-xl-6">
                             <div class="form-group" disabled>
                                 <label for="exampleInputEmail1">Nama</label>
-                                <input type="hidden" class="form-control" id="date_created" name="date_created" value="<?= date('d-M-Y G:i:s'); ?>">
+                                <input type="hidden" class="form-control" id="date_created" name="date_created" value="<?php $timezone = time() + (60 * 60 * 7);
+                                                                                                                        echo gmdate('d-m-Y H:i:s', $timezone); ?>">
                                 <input type="hidden" class="form-control" id="head" name="head" value="<?= $user['id']; ?>">
                                 <input type="text" class="form-control" id="nama" name="nama" value="<?= $nm['nama']; ?>" readonly>
                                 <input type="hidden" class="form-control" id="id" name="id" value="<?= $d['id']; ?>">

@@ -11,7 +11,7 @@
     <!-- App Favicon -->
     <link rel="shortcut icon" href="<?= base_url('assets/') ?>images/logo-mini.png" />
     <!-- App title -->
-    <title>Info | GMI</title>
+    <title>Cha - Man</title>
 
 
     <!--calendar css-->

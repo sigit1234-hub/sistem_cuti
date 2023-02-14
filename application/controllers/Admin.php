@@ -2,22 +2,20 @@
 
 defined('BASEPATH') or exit('No direct script access allowed');
 
-
-
 class Admin extends CI_Controller
 {
     public function __construct()
     {
         parent::__construct(); //ini untuk memanggil method construct yang ada di CI_Controller
         $this->load->library('form_validation');
-        // is_logged_in();
+        is_logged_in();
         $this->load->model('User_m');
         $this->load->model('M_home');
-        $this->load->model('M_absen');
+        // $this->load->model('M_absen');
         $this->load->model('M_cuti');
-        $this->load->model('M_izin');
-        $this->load->model('M_kasbon');
-        $this->load->model('M_peminjaman');
+        // $this->load->model('M_izin');
+        // $this->load->model('M_kasbon');
+        // $this->load->model('M_peminjaman');
         $this->load->model('M_spl');
         $this->load->model('Member_model');
         $this->load->model('Menu_model');
@@ -132,11 +130,16 @@ class Admin extends CI_Controller
         $this->load->view('unpin/navbar', $data);
         $this->load->view('cuti/admin', $data);
         $this->load->view('unpin/footer', $data);
+        // $data['title'] = "Data Cuti";
+        // $data['user'] = $this->User_m->tampil_data();
+        // $data['cuti'] = $this->M_cuti->cuti_divisi()->result_array();
+        // $data['jenis_cuti'] = $this->M_cuti->getjenis_cuti()->result_array();
         // $this->load->view('new_template/header', $data);
         // $this->load->view('new_template/topbar', $data);
         // $this->load->view('new_template/sidebar', $data);
         // $this->load->view('cuti/admin', $data);
         // $this->load->view('new_template/footer', $data);
+
     }
     public function edit_cuti()
     {
@@ -155,6 +158,7 @@ class Admin extends CI_Controller
         redirect('Admin/admin_cuti');
     }
     // akhir data cuti acc
+    //spl
 
     //spl
     public function laporan_spl()
@@ -181,10 +185,11 @@ class Admin extends CI_Controller
         if ($jumlah == $hitung) {
             $this->db->where('kode_spl', $id);
             $this->db->update('spl', ['status' => '3']);
-        } else {
-            $this->db->where('kode_spl', $id);
-            $this->db->update('spl', ['status' => '4']);
         }
+        // } else {
+        //     $this->db->where('kode_spl', $id);
+        //     $this->db->update('spl', ['status' => '4']);
+        // }
         $this->session->set_flashdata('message', '<div class="alert alert-success text-center" role="alert">
             Data Berhasil diupdate!
           </div>');

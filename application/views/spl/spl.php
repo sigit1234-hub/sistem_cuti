@@ -53,7 +53,7 @@
                         </thead>
                         <tbody>
                             <?php $i = 1; ?>
-                            <?php foreach ($spl as $d) : ?>
+                            <?php foreach ($spl->result_array() as $d) : ?>
                                 <tr>
                                     <th scope=# data-toggle="modal" data-target="#lihatModal<?php echo $d['id']; ?>"><?= $i; ?></th>
                                     <td class="users-list clearfix" data-toggle="modal" data-target="#lihatModal<?php echo $d['id']; ?>">
@@ -75,11 +75,11 @@
                                     <?php
                                     $kode  = $d['kode_spl'];
                                     $this->db->where('kode_input_spl', $kode);
-                                    $sql = $this->db->get('input_spl')->result_array();
+                                    $sql = $this->db->get('input_spl');
                                     ?>
                                     <td data-toggle="modal" data-target="#lihatModal<?php echo $d['id']; ?>">
                                         <?php $no = 0; ?>
-                                        <?php foreach ($sql as $in) : $no++ ?>
+                                        <?php foreach ($sql->result_array() as $in) : $no++ ?>
                                             <?php
                                             $this->db->where('id', $in['anggota']);
                                             $query = $this->db->get('karyawan')->result_array();

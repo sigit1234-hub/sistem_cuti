@@ -34,31 +34,10 @@ class User_m extends CI_Model
             return $sql;
         }
     }
-    public function data_izin($id = null)
-    {
-        if ($id != null) {
-            $sql = $this->db->order_by('id', 'Desc')->get_where('izin', ['nama_id' => $id])->result_array();
-            return $sql;
-        } else {
-            $sql = $this->db->order_by('id', 'Desc')->get_where('izin', ['nama_id' => $this->session->userdata('id')])->result_array();
-            return $sql;
-        }
-    }
     public function data_karyawan()
     {
         return $this->db->order_by('id', 'Desc')->get('karyawan')->result_array();
     }
-
-    public function data_kasbon($id = null)
-    {
-        if ($id != null) {
-            $sql = $this->db->order_by('id', 'Desc')->get_where('kasbon', ['nama_id' => $id])->result_array();
-            return $sql;
-        } else {
-            return $this->db->order_by('id', 'DESC')->get_where('kasbon', ['nama_id' => $this->session->userdata('id')])->result_array();
-        }
-    }
-
     public function add_karyawan($post)
     {
         $upload_image = $_FILES['foto'];
@@ -231,18 +210,7 @@ class User_m extends CI_Model
         }
     }
 
-    public function get_jumlah_izin($id = null)
-    {
-        if ($id != null) {
-            $this->db->select('SUM(durasi) AS total');
-            $this->db->where('nama_id', $id);
-            return $this->db->get('izin')->row()->total;
-        }
-        $id = $this->session->userdata('id');
-        $this->db->select('SUM(durasi) AS total');
-        $this->db->where('nama_id', $id);
-        return $this->db->get('izin')->row()->total;
-    }
+
     public function ambil_karyawan()
     {
         return $this->db->order_by('nama', 'ASC')->get('karyawan')->result_array();
@@ -531,5 +499,11 @@ class User_m extends CI_Model
             $where = array('id' => $id);
             $this->User_m->update_kar($where, $data, 'karyawan');
         }
+    }
+    public function detail_nama($id)
+    {
+        $this->db->where('id', $id);
+        $result = $this->db->get('karyawan')->result_array();
+        return $result;
     }
 }

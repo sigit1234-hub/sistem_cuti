@@ -101,17 +101,7 @@
                                 <tr>
                                     <td><?= $i; ?></td>
                                     <td><?= $d['nama'] ?></td>
-                                    <td><?php if ($d['status1'] == 1) {
-                                            echo "<span class='label label-danger' width='30px'>MENUNGGU</span>";
-                                        } elseif ($d['status1'] == 2) {
-                                            echo "<span class='label label-success'>DISETUJUI</span>";
-                                        } elseif ($d['status1'] == 3) {
-                                            echo "<span class='label label-warning'>DISETUJUI</span>";
-                                        } elseif ($d['status1'] == null) {
-                                            echo "<span class='label label-warning'>??</span>";
-                                        } else {
-                                            echo "<span class='label label-danger'>DIBATALKAN</span>";
-                                        } ?></td>
+                                    <td></td>
                                     <td><?php if ($d['tanggal'] == $d['date_end']) {
                                             echo date('d M Y', strtotime($d['tanggal']));
                                         } elseif (date(' M', strtotime($d['tanggal'])) == date(' M', strtotime($d['date_end']))) {

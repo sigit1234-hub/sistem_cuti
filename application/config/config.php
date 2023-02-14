@@ -23,7 +23,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = 'http://localhost/info/'; //alamat untuk membuka web, jika nanti pindah hosting pindah
+$config['base_url'] = 'http://localhost/sistem_cuti/'; //alamat untuk membuka web, jika nanti pindah hosting pindah
 /*
 |--------------------------------------------------------------------------
 | Index File
