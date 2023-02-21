@@ -33,7 +33,7 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-body">
-                            <?= $this->session->flashdata('message'); ?>
+                            <!-- <?= $this->session->flashdata('message'); ?> -->
                             <div class="box-body">
                                 <div class="col-md-12">
                                     <div id="notif"></div>

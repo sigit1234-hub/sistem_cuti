@@ -31,42 +31,43 @@
         <div class="row">
             <div class="col-12">
                 <div class="card-box table-responsive">
-                    <table id="responsive-datatable" style="Word-wrap:break-Word;
-              " class="table table-bordered table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
-                        <thead>
-                            <tr style="text-align: center;">
-                                <th>No</th>
+                    <table id="responsive-datatable" class="table table-bordered dt-responsive" cellspacing="0" width="100%">
+                        <thead class="thead-light">
+                            <tr>
+                                <th>#</th>
+                                <th>Foto</th>
                                 <th>Nama</th>
                                 <th>Status</th>
                                 <th>Diajukan</th>
-                                <th>Head Dept</th>
+                                <th>kepala Toko</th>
                                 <th>HRD</th>
                                 <th>Keterangan</th>
-                                <th>Aksi</th>
+                                <th>Details</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php $i = 1; ?>
                             <?php foreach ($cuti as $d) : ?>
                                 <tr>
-                                    <td width="5%"><?= $i; ?></td>
+                                    <td width="2%"><?= $i; ?></td>
                                     <?php
                                     $id = $d['nama_id'];
                                     $this->db->where('id', $id);
                                     $return = $this->db->get('karyawan')->result_array()
                                     ?>
                                     <?php foreach ($return as $nama) : ?>
+                                        <td width="9%"><img class="img-responsive rounded-circle" style="width: 60%;" src="<?= base_url('assets/img/profile/') . $nama['foto'] ?>"></td>
                                         <td><?= $nama['nama']; ?></td>
                                     <?php endforeach; ?>
                                     <td><?php if ($d['status1'] == 1) {
                                             echo "<span class='label label-danger' width='30px'>Menunggu <br>ACC head</span>";
-                                        } elseif ($d['status1'] == 2 && $d['status'] == 2) {
+                                        } elseif ($d['status1'] == 2 && $d['status'] == 3) {
                                             echo "<span class='label label-success'>DISETUJUI</span>";
-                                            echo "<br>Tanggal Approvel <br>";
+                                            echo "<br>Tanggal yang di ACC <br>";
                                             if ($d['tanggal_acc_hr'] == $d['date_acc_hr']) {
                                                 echo '<b>' . date('d M Y', strtotime($d['tanggal_acc_hr'])) . '</b>';
                                             } elseif (date(' M', strtotime($d['tanggal_acc_hr'])) == date(' M', strtotime($d['date_acc_hr']))) {
-                                                echo '<b>' . date('d', strtotime($d['tanggal_acc_hr'])) . "-" . date('d M Y', strtotime($d['date_acc_hr'])) . '</b>';
+                                                echo '<b>' . date('d', strtotime($d['tanggal_acc_hr'])) . '-' . date('d M Y', strtotime($d['date_acc_hr'])) . '</b>';
                                             } else {
                                                 echo '<b>' . date('d M', strtotime($d['tanggal_acc_hr'])) . "-" . date('d M Y', strtotime($d['date_acc_hr'])) . '</b>';
                                             }
@@ -90,37 +91,35 @@
                                         }
                                         ?>
                                     </td>
-                                    <?php
-                                    $this->db->where('id', $d['head']);
-                                    $divisi = $this->db->get('karyawan')->result_array();
-                                    ?>
-                                    <?php foreach ($divisi as $di) : ?>
-                                        <td>
-                                            <?php if ($d['status1'] == 2) {
+                                    <td>
+                                        <?php
+                                        if ($d['status1'] == 2) {
+
+                                            $head = $this->User_m->detail_nama($d['head']);
+                                            foreach ($head as $di) {
                                                 echo $di['nama'];
-                                                echo "<br>" . $d['date_created_head'];
-                                            } else {
-                                                echo "Belum ada ACC";
+                                                echo "<br> (" . $d['date_created_head'] . ")";
                                             }
-                                            ?>
-                                        </td>
-                                    <?php endforeach; ?>
-                                    <?php
-                                    $this->db->where('id', $d['head']);
-                                    $hrd = $this->db->get('karyawan')->result_array();
-                                    ?>
-                                    <?php foreach ($hrd as $hr) : ?>
-                                        <td><?php
-                                            if ($d['status'] == 2) {
-                                                echo $hr['nama'];
-                                                echo "<br>" . $d['date_created_hr'];
-                                            } else {
-                                                echo "Belum ada ACC";
+                                        } else {
+                                            echo "Belum ada ACC";
+                                        }
+                                        ?>
+                                    </td>
+
+                                    <td>
+                                        <?php
+                                        if ($d['status'] == 3) {
+                                            $head = $this->User_m->detail_nama($d['hr']);
+                                            foreach ($head as $di) {
+                                                echo $di['nama'];
+                                                echo "<br> (" . $d['date_created_hr'] . ")";
                                             }
-                                            ?>
-                                        </td>
-                                    <?php endforeach; ?>
-                                    <td width="30%"><?= $d['keterangan'] ?></td>
+                                        } else {
+                                            echo "Belum ada ACC";
+                                        }
+                                        ?>
+                                    </td>
+                                    <td><?= $d['keterangan'] ?></td>
                                     <td>
                                         <a href="#custom-modal<?= $d['id'] ?>" class="btn btn-primary waves-effect waves-light m-r-5 m-b-10" data-animation="fadein" data-plugin="custommodal" data-overlaySpeed="100" data-overlayColor="#36404a"><i class=" fa fa-pencil-square"></i></a>
                                     </td>
@@ -160,41 +159,30 @@ foreach ($cuti as $d) : $no++ ?>
                 ?>
                 <?php foreach ($sql as $nm) : ?>
                     <div class="row">
-                        <div class="col-lg-12 col-sm-12 col-xs-12 col-md-12 col-xl-6">
+                        <div class="col-lg-12 col-sm-12 col-xs-12 col-md-12 col-xl-4">
                             <div class="form-group" disabled>
                                 <label for="exampleInputEmail1">Nama</label>
                                 <input type="hidden" class="form-control" id="date_created" name="date_created" value="<?php $timezone = time() + (60 * 60 * 7);
                                                                                                                         echo gmdate('d-m-Y H:i:s', $timezone); ?>">
-                                <input type="hidden" class="form-control" id="head" name="head" value="<?= $user['id']; ?>">
+                                <input type="hidden" class="form-control" id="approve" name="approve" value="<?= $user['id']; ?>">
                                 <input type="text" class="form-control" id="nama" name="nama" value="<?= $nm['nama']; ?>" readonly>
                                 <input type="hidden" class="form-control" id="id" name="id" value="<?= $d['id']; ?>">
                                 <input type="hidden" class="form-control" id="value" name="value" value="1">
+                                <input type="hidden" class="form-control" id="kode_cuti" name="kode_cuti" value=<?= $d['kode_cuti'] ?>>
                                 <input type="hidden" class="form-control" id="nama_id" name="nama_id" value="<?= $d['nama_id']; ?>">
                             </div>
                         </div>
-                        <div class="col-lg-12 col-sm-12 col-xs-12 col-md-12 col-xl-6">
+                        <div class="col-lg-12 col-sm-12 col-xs-12 col-md-12 col-xl-4">
                             <label for="exampleInputEmail1">Tanggal Pengajuan</label>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <input type="text" class="form-control" id="date_created1" name="date_created1" value="<?= $d['tanggal'] ?>" readonly>
-                                </div>
-                                <div class="col-md-6">
-                                    <input type="text" class="form-control" id="date_end1" name="date_end1" value="<?= $d['date_end'] ?>" readonly>
-                                </div>
-                            </div>
+                            <input type="text" class="form-control" id="date_created1" name="date_created1" value="<?php if ($d['tanggal'] == $d['date_end']) {
+                                                                                                                        echo date('d M Y', strtotime($d['tanggal']));
+                                                                                                                    } elseif (date(' M', strtotime($d['tanggal'])) == date(' M', strtotime($d['date_end']))) {
+                                                                                                                        echo date('d', strtotime($d['tanggal'])) . "-" . date('d M Y', strtotime($d['date_end']));
+                                                                                                                    } else {
+                                                                                                                        echo date('d M', strtotime($d['tanggal'])) . "-" . date('d M Y', strtotime($d['date_end']));
+                                                                                                                    } ?>" readonly>
                         </div>
-                        <div class="col-lg-12 col-sm-12 col-xs-12 col-md-12 col-xl-6">
-                            <label for="exampleInputEmail1">Perubahan tanggal</label>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <input type="date" class="form-control" id="tanggal_acc_head" name="tanggal_acc_head" value="<?= $d['tanggal'] ?>">
-                                </div>
-                                <div class="col-md-6">
-                                    <input type="date" class="form-control" id="date_acc_head" name="date_acc_head" value="<?= $d['date_end'] ?>">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-12 col-sm-12 col-xs-12 col-md-12 col-xl-6">
+                        <div class="col-lg-12 col-sm-12 col-xs-12 col-md-12 col-xl-4">
                             <div class="form-group" disabled>
                                 <label for="exampleInputEmail1">Kategori</label>
                                 <?php
@@ -206,7 +194,15 @@ foreach ($cuti as $d) : $no++ ?>
                                 <?php endforeach; ?>
                             </div>
                         </div>
-                        <div class="col-lg-12 col-sm-12 col-xs-12 col-md-12 col-xl-6">
+                        <div class="col-lg-12 col-sm-12 col-xs-12 col-md-12 col-xl-4">
+                            <label for="exampleInputEmail1">Perubahan tanggal</label>
+                            <input type="date" class="form-control" id="tanggal_acc_head" name="tanggal_acc_head" value="<?= $d['tanggal'] ?>">
+                        </div>
+                        <div class="col-lg-12 col-sm-12 col-xs-12 col-md-12 col-xl-4">
+                            <label for="exampleInputEmail1">Sampai tanggal</label>
+                            <input type="date" class="form-control" id="date_acc_head" name="date_acc_head" value="<?= $d['date_end'] ?>">
+                        </div>
+                        <div class="col-lg-12 col-sm-12 col-xs-12 col-md-12 col-xl-4">
                             <div class="form-group" disabled>
                                 <label for="exampleInputEmail1">Keterangan</label>
                                 <textarea type="text" class="form-control" id="keterangan" name="keterangan" value="<?= $d['keterangan']; ?>" readonly><?= $d['keterangan']; ?></textarea>
@@ -219,11 +215,10 @@ foreach ($cuti as $d) : $no++ ?>
                             </div>
                         </div>
                         <div class="col-lg-12 col-sm-12 col-xs-12 col-md-12 col-xl-6">
-                        </div>
-                        <div class="col-lg-12 col-sm-12 col-xs-12 col-md-12 col-xl-6">
+                            <label for="exampleInputEmail1">Persetujuan</label>
                             <select name="status" id="status" class="form-control">
                                 <option value="2">Setuju</option>
-                                <option value="3">Batalkan</option>
+                                <option value="5">Batalkan</option>
                             </select>
                         </div>
                     </div>

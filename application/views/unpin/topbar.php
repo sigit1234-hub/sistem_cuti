@@ -2,9 +2,9 @@
   <div class="topbar">
       <!-- LOGO -->
       <div class="topbar-left">
-          <a href="index.html" class="logo">
+          <a href="<?= base_url('User') ?>" class="logo">
               <i class="zmdi zmdi-group-work"></i>
-              <span>INFO GMI</span></a>
+              <span>My Cha-Man</span></a>
       </div>
 
       <nav class="navbar-custom">

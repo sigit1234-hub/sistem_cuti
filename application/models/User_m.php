@@ -506,4 +506,9 @@ class User_m extends CI_Model
         $result = $this->db->get('karyawan')->result_array();
         return $result;
     }
+    public function status($id)
+    {
+        $this->db->where('id', $id);
+        return $this->db->get('status')->result_array();
+    }
 }
